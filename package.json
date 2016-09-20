@@ -1,0 +1,16 @@
+{
+	"name": "wp-mobile",
+	"description" : "Plugin let you allow to create mobile application in wordpress",
+	"repository" : "https://github.com/dhaval-parekh/wp-mobile",
+	"dependencies": {
+		"load-grunt-tasks": "~0.2.1"
+	},
+	"devDependencies": {
+		"grunt": "~0.4.5",
+		"grunt-checktextdomain": "~1.0.0",
+		"grunt-contrib-uglify": "~0.11.0",
+		"grunt-contrib-watch": "~0.6.1",
+		"grunt-wp-i18n": "~0.5.3",
+		"load-grunt-tasks": "~0.2.1"
+	}
+}
