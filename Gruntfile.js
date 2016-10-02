@@ -55,7 +55,8 @@ module.exports = function (grunt) {
 							'*.php',
 							'**/*.php',
 							'!node_modules/**',
-							'!tests/**'
+							'!tests/**',
+							'!vendor/**'
 						], //all php
 						expand: true
 					}]
