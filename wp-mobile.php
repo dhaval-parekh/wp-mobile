@@ -186,7 +186,7 @@ class WP_Mobile {
 	}
 
 	public function get_rest_namespace() {
-		return $this->namespace;
+		return trailingslashit( $this->namespace );
 	}
 
 	/**
