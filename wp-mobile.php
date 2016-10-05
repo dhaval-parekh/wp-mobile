@@ -168,30 +168,25 @@ class WP_Mobile {
 		global $wp_post_types;
 		add_filter( 'get_rest_namespace', array( $this, 'get_rest_namespace' ), 15 );
 
-		if ( isset( $wp_post_types['post'] ) ) {
-			$wp_post_types['post']->rest_controller_class = 'WP_Mobile_Posts_Controller';
+		$post_types = array( 'post', 'page' );
+		$post_types = apply_filters( 'wp_mobile_post_type_to_overwrite', $post_types );
+		foreach ( $post_types as $post_type ) {
+			if ( isset( $wp_post_types[ $post_type ] ) ) {
+				if ( ! isset( $wp_post_types[ $post_type ]->rest_controller_class ) || 'WP_Mobile_Posts_Controller' === $wp_post_types[ $post_type ]->rest_controller_class ) {
+					$wp_post_types[ $post_type ]->rest_controller_class = 'WP_Mobile_Posts_Controller';
+				}
+			}
+			add_filter( "get_{$post_type}_items", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+			add_filter( "get_{$post_type}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+			add_filter( "create_{$post_type}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+			add_filter( "update_{$post_type}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+			add_filter( "delete_{$post_type}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
 		}
-		if ( isset( $wp_post_types['page'] ) ) {
-			$wp_post_types['page']->rest_controller_class = 'WP_Mobile_Posts_Controller';
-		}
 
-		add_filter( 'get_post_items', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
-		add_filter( 'get_post_item', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
-		add_filter( 'create_post_item', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
-		add_filter( 'update_post_item', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
-		add_filter( 'delete_post_item', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
-
-		add_filter( 'get_page_items', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
-		add_filter( 'get_page_item', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
-		add_filter( 'create_page_item', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
-		add_filter( 'update_page_item', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
-		add_filter( 'delete_page_item', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
-
-		do_action( 'wp_mobile_overwrite_rest_api' );
 	}
 
 	public function get_rest_namespace() {
-		return $this->namespace;
+		return trailingslashit( $this->namespace );
 	}
 
 	/**
@@ -204,8 +199,10 @@ class WP_Mobile {
 	 * @return	WP_REST_Response response object
 	 */
 	public function overwrite_rest_api_response( $response ) {
+		if ( is_wp_error( $response ) ) {
+			return $response;
+		}
 		$data = $response->data;
-
 		if ( ! isset( $data['code'] ) ) {
 			$response->data = array(
 				'code'		 => 'rest_success',
