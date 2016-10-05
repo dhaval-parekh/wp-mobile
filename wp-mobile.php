@@ -172,7 +172,7 @@ class WP_Mobile {
 		$post_types = apply_filters( 'wp_mobile_post_type_to_overwrite', $post_types );
 		foreach ( $post_types as $post_type ) {
 			if ( isset( $wp_post_types[ $post_type ] ) ) {
-				if ( ! isset( $wp_post_types[ $post_type ]->rest_controller_class ) || 'WP_Mobile_Posts_Controller' === $wp_post_types[ $post_type ]->rest_controller_class ) {
+				if ( ! isset( $wp_post_types[ $post_type ]->rest_controller_class ) || 'WP_REST_Posts_Controller' === $wp_post_types[ $post_type ]->rest_controller_class ) {
 					$wp_post_types[ $post_type ]->rest_controller_class = 'WP_Mobile_Posts_Controller';
 				}
 			}
