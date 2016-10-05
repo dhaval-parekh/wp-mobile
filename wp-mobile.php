@@ -204,8 +204,10 @@ class WP_Mobile {
 	 * @return	WP_REST_Response response object
 	 */
 	public function overwrite_rest_api_response( $response ) {
+		if ( is_wp_error( $response ) ) {
+			return $response;
+		}
 		$data = $response->data;
-
 		if ( ! isset( $data['code'] ) ) {
 			$response->data = array(
 				'code'		 => 'rest_success',
