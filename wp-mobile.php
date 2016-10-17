@@ -101,22 +101,21 @@ class WP_Mobile {
 		if ( defined( 'REST_NAMESPACE' ) ) {
 			$this->namespace = REST_NAMESPACE;
 		}
-		add_action( 'init', array( $this, 'init' ), 15 );
+		add_action( 'init', array( $this, 'init' ), 0 );
 		return true;
 	}
 
 	/**
-	 * return instance of true
+	 * initilization
 	 *
 	 * @access		public
 	 * @since		1.0.0
-	 * @staticvar	\WP_Mobile		$instance
-	 * @return		\WP_Mobile|bool
+	 * @return		bool
 	 */
 	public function init() {
 		$this->includes();
-		$this->overwrite_rest_api();
-		//display(wp_get_current_user());
+		//$this->overwrite_rest_api();
+		add_action( 'rest_api_init', array( $this, 'overwrite_rest_api' ), -1 );
 		return true;
 	}
 
@@ -141,6 +140,7 @@ class WP_Mobile {
 	private function includes() {
 		//	include inc
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-posts-controller.php';
+		require_once $this->inc_dir . 'rest-api/class-wp-mobile-users-controller.php';
 	}
 
 	/**
@@ -164,9 +164,18 @@ class WP_Mobile {
 		return true;
 	}
 
-	private function overwrite_rest_api() {
+	public function overwrite_rest_api() {		error_log(__FUNCTION__);
 		global $wp_post_types;
 		add_filter( 'get_rest_namespace', array( $this, 'get_rest_namespace' ), 15 );
+
+		$controller = new WP_Mobile_Users_Controller();
+		$controller->register_routes();
+
+		add_filter( 'get_users', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+		add_filter( 'get_user', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+		add_filter( 'create_user', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+		add_filter( 'update_user', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+		add_filter( 'delete_user', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
 
 		$post_types = array( 'post', 'page' );
 		$post_types = apply_filters( 'wp_mobile_post_type_to_overwrite', $post_types );
@@ -182,7 +191,6 @@ class WP_Mobile {
 			add_filter( "update_{$post_type}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
 			add_filter( "delete_{$post_type}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
 		}
-
 	}
 
 	public function get_rest_namespace() {
