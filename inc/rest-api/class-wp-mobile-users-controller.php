@@ -43,7 +43,7 @@ class WP_Mobile_Users_Controller extends WP_REST_Users_Controller {
 	 */
 	public function create_item( $request ) {
 		$response = parent::create_item( $request );
-		return apply_filters( 'create_users', $response, $request );
+		return apply_filters( 'create_user', $response, $request );
 	}
 
 	/**
@@ -56,7 +56,7 @@ class WP_Mobile_Users_Controller extends WP_REST_Users_Controller {
 	 */
 	public function update_item( $request ) {
 		$response = parent::update_item( $request );
-		return apply_filters( 'update_users', $response, $request );
+		return apply_filters( 'update_user', $response, $request );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class WP_Mobile_Users_Controller extends WP_REST_Users_Controller {
 	 */
 	public function delete_item( $request ) {
 		$response = parent::delete_item( $request );
-		return apply_filters( 'delete_users', $response, $request );
+		return apply_filters( 'delete_user', $response, $request );
 	}
 
 }
