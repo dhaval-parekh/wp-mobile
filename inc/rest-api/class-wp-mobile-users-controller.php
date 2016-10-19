@@ -94,7 +94,7 @@ class WP_Mobile_Users_Controller extends WP_REST_Users_Controller {
 			return false;
 		}
 		$users_can_register = get_option( 'users_can_register', false );
-		if ( false === $users_can_register ) {
+		if ( ! $users_can_register ) {
 			return false;
 		}
 		unset( $request['roles'] );
