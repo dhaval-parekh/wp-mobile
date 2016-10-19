@@ -164,7 +164,7 @@ class WP_Mobile {
 		return true;
 	}
 
-	public function overwrite_rest_api() {		error_log(__FUNCTION__);
+	public function overwrite_rest_api() {
 		global $wp_post_types;
 		add_filter( 'get_rest_namespace', array( $this, 'get_rest_namespace' ), 15 );
 
