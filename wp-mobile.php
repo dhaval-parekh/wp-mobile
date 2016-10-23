@@ -141,6 +141,7 @@ class WP_Mobile {
 		//	include inc
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-posts-controller.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-users-controller.php';
+		require_once $this->inc_dir . 'rest-api/class-wp-mobile-terms-controller.php';
 	}
 
 	/**
@@ -164,8 +165,8 @@ class WP_Mobile {
 		return true;
 	}
 
-	public function overwrite_rest_api() {		error_log(__FUNCTION__);
-		global $wp_post_types;
+	public function overwrite_rest_api() {
+		global $wp_post_types, $wp_taxonomies;
 		add_filter( 'get_rest_namespace', array( $this, 'get_rest_namespace' ), 15 );
 
 		$controller = new WP_Mobile_Users_Controller();
@@ -190,6 +191,21 @@ class WP_Mobile {
 			add_filter( "create_{$post_type}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
 			add_filter( "update_{$post_type}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
 			add_filter( "delete_{$post_type}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+		}
+
+		$taxonomies = array( 'category', 'post_tag' );
+		$taxonomies = apply_filters( 'wp_mobile_taxonomy_to_overwrite', $taxonomies );
+		foreach ( $taxonomies as $taxonomy ) {
+			if ( isset( $wp_taxonomies[ $taxonomy ] ) ) {
+				if ( ! isset( $wp_taxonomies[ $taxonomy ]->rest_controller_class ) || 'WP_REST_Terms_Controller' === $wp_taxonomies[ $taxonomy ]->rest_controller_class ) {
+					$wp_taxonomies[ $taxonomy ]->rest_controller_class = 'WP_Mobile_Terms_Controller';
+				}
+			}
+			add_filter( "get_{$taxonomy}_items", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+			add_filter( "get_{$taxonomy}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+			add_filter( "create_{$taxonomy}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+			add_filter( "update_{$taxonomy}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+			add_filter( "delete_{$taxonomy}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
 		}
 	}
 
