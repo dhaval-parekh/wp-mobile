@@ -1,6 +1,6 @@
 <?php
 
-class WP_Mobile_Post_Types_Controller extends WP_REST_Post_Types_Controller {
+class WP_Mobile_Post_Statuses_Controller extends WP_REST_Post_Statuses_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -8,7 +8,7 @@ class WP_Mobile_Post_Types_Controller extends WP_REST_Post_Types_Controller {
 	}
 
 	/**
-	 * Get a collection of post types.
+	 * Get a collection of post statuses.
 	 *
 	 * @since	1.0.0
 	 * @access	public
@@ -17,11 +17,11 @@ class WP_Mobile_Post_Types_Controller extends WP_REST_Post_Types_Controller {
 	 */
 	public function get_items( $request ) {
 		$response = parent::get_items( $request );
-		return apply_filters( 'get_post_types', $response, $request );
+		return apply_filters( 'get_post_statuses', $response, $request );
 	}
 
 	/**
-	 * Get a single posttype.
+	 * Get a single post status.
 	 *
 	 * @since	1.0.0
 	 * @access	public
@@ -30,6 +30,6 @@ class WP_Mobile_Post_Types_Controller extends WP_REST_Post_Types_Controller {
 	 */
 	public function get_item( $request ) {
 		$response = parent::get_item( $request );
-		return apply_filters( 'get_post_type', $response, $request );
+		return apply_filters( 'get_post_status', $response, $request );
 	}
 }
