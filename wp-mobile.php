@@ -146,6 +146,7 @@ class WP_Mobile {
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-post-types-controller.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-post-statuses-controller.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-comments-controller.php';
+		require_once $this->inc_dir . 'rest-api/class-wp-mobile-revisions-controller.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-terms-controller.php';
 	}
 
@@ -225,7 +226,14 @@ class WP_Mobile {
 			add_filter( "create_{$post_type}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
 			add_filter( "update_{$post_type}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
 			add_filter( "delete_{$post_type}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+
+			$controller = new WP_Mobile_Revisions_Controller( $post_type );
+			$controller->register_routes();
 		}
+
+		add_filter( 'get_revisions', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+		add_filter( 'get_revision', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
+		add_filter( 'delete_revision', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
 
 		$taxonomies = array( 'category', 'post_tag' );
 		$taxonomies = apply_filters( 'wp_mobile_taxonomy_to_overwrite', $taxonomies );
