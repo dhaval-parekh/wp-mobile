@@ -8,20 +8,20 @@ class WP_Mobile_Users_Controller extends WP_REST_Users_Controller {
 	}
 
 	/**
-	 * Get a collection of posts.
+	 * Get a collection of users.
 	 *
 	 * @since	1.0.0
 	 * @access	public
 	 * @param	WP_REST_Request $request Full details about the request.
 	 * @return	WP_REST_Response|WP_Error
 	 */
-	public function get_items( $reuqest ) {
-		$response = parent::get_items( $reuqest );
-		return apply_filters( 'get_users', $response, $reuqest );
+	public function get_items( $request ) {
+		$response = parent::get_items( $request );
+		return apply_filters( 'get_users', $response, $request );
 	}
 
 	/**
-	 * Get a single post.
+	 * Get a single user.
 	 *
 	 * @since	1.0.0
 	 * @access	public
@@ -34,7 +34,7 @@ class WP_Mobile_Users_Controller extends WP_REST_Users_Controller {
 	}
 
 	/**
-	 * Create a single post.
+	 * Create a single user.
 	 *
 	 * @since	1.0.0
 	 * @access	public
@@ -47,7 +47,7 @@ class WP_Mobile_Users_Controller extends WP_REST_Users_Controller {
 	}
 
 	/**
-	 * Update a single post.
+	 * Update a single user.
 	 *
 	 * @since	1.0.0
 	 * @access	public
@@ -60,7 +60,7 @@ class WP_Mobile_Users_Controller extends WP_REST_Users_Controller {
 	}
 
 	/**
-	 * Delete a single post.
+	 * Delete a single user.
 	 *
 	 * @since	1.0.0
 	 * @access	public
