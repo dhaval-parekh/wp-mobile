@@ -268,6 +268,9 @@ class WP_Mobile {
 		if ( is_wp_error( $response ) ) {
 			return $response;
 		}
+		if ( ! $response instanceof WP_REST_Response) {
+			return $response;
+		}
 		$data = $response->data;
 		if ( ! isset( $data['code'] ) ) {
 			$response->data = array(
