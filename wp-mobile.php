@@ -141,6 +141,7 @@ class WP_Mobile {
 		//	include inc
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-posts-controller.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-users-controller.php';
+		require_once $this->inc_dir . 'rest-api/class-wp-mobile-attachments-controller.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-taxonomies-controller.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-terms-controller.php';
 	}
@@ -185,8 +186,10 @@ class WP_Mobile {
 		add_filter( 'get_taxonomies', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
 		add_filter( 'get_taxonomy', array( $this, 'overwrite_rest_api_response' ), 15, 1 );
 
-		$post_types = array( 'post', 'page' );
+		$post_types = array( 'post', 'page', 'attachment' );
 		$post_types = apply_filters( 'wp_mobile_post_type_to_overwrite', $post_types );
+		$wp_post_types['attachment']->rest_controller_class = 'WP_Mobile_Attachments_Controller';
+
 		foreach ( $post_types as $post_type ) {
 			if ( isset( $wp_post_types[ $post_type ] ) ) {
 				if ( ! isset( $wp_post_types[ $post_type ]->rest_controller_class ) || 'WP_REST_Posts_Controller' === $wp_post_types[ $post_type ]->rest_controller_class ) {
