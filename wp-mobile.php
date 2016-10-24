@@ -114,7 +114,6 @@ class WP_Mobile {
 	 */
 	public function init() {
 		$this->includes();
-		//$this->overwrite_rest_api();
 		add_action( 'rest_api_init', array( $this, 'overwrite_rest_api' ), -1 );
 		return true;
 	}

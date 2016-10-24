@@ -23,9 +23,9 @@ class WP_Mobile_Posts_Controller extends WP_REST_Posts_Controller {
 	 * @param	WP_REST_Request $request Full details about the request.
 	 * @return	WP_REST_Response|WP_Error
 	 */
-	public function get_items( $reuqest ) {
-		$response = parent::get_items( $reuqest );
-		return apply_filters( "get_{$this->post_type}_items", $response, $reuqest );
+	public function get_items( $request ) {
+		$response = parent::get_items( $request );
+		return apply_filters( "get_{$this->post_type}_items", $response, $request );
 	}
 
 	/**
