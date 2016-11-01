@@ -98,7 +98,7 @@ class WP_Mobile_Users_Controller extends WP_REST_Users_Controller {
 			return false;
 		}
 		unset( $request['roles'] );
-		return true;
+		return apply_filters( 'register_user_permissions_check', $request, true );
 	}
 
 }
