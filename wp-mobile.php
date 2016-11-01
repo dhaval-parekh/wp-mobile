@@ -251,7 +251,7 @@ class WP_Mobile {
 	}
 
 	public function get_rest_namespace() {
-		return trailingslashit( $this->namespace );
+		return untrailingslashit( $this->namespace );
 	}
 
 	/**
@@ -267,7 +267,7 @@ class WP_Mobile {
 		if ( is_wp_error( $response ) ) {
 			return $response;
 		}
-		if ( ! $response instanceof WP_REST_Response) {
+		if ( ! $response instanceof WP_REST_Response ) {
 			return $response;
 		}
 		$data = $response->data;
