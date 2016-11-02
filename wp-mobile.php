@@ -248,6 +248,7 @@ class WP_Mobile {
 			add_filter( "update_{$taxonomy}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
 			add_filter( "delete_{$taxonomy}_item", array( $this, 'overwrite_rest_api_response' ), 15, 1 );
 		}
+		do_action( 'wp_mobile_overwrite_rest_api', $this );
 	}
 
 	public function get_rest_namespace() {
