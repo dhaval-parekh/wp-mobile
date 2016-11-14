@@ -137,7 +137,11 @@ class WP_Mobile {
 	}
 
 	private function includes() {
+		//	include lib
+		require_once $this->lib_dir . 'class-wp-mobile-crypto.php';
+
 		//	include inc
+		require_once $this->inc_dir . 'helpers.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-posts-controller.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-users-controller.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-attachments-controller.php';
