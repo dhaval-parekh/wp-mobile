@@ -139,7 +139,7 @@ class WP_Mobile_Users_Controller extends WP_REST_Users_Controller {
 		$data['token'] = md5( $user->data->user_pass . $data['timestamp'] );
 		$data['auth'] = base64_encode( $request['username'] . ':' . $request['password'] );
 
-		$string = serialize( $data );
+		$string = maybe_serialize( $data );
 		$access_token = wp_mobile_encrypt( $string );
 		if ( ! $access_token ) {
 			return flase;
