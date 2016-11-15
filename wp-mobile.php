@@ -135,14 +135,49 @@ class WP_Mobile {
 		$this->vendor_dir = trailingslashit( $this->plugin_path . 'vendor' );
 		$this->lib_dir = trailingslashit( $this->plugin_path . 'lib' );
 		$this->inc_dir = trailingslashit( $this->plugin_path . 'inc' );
+		$this->template_dir = trailingslashit( $this->plugin_path . 'templates' );
+
+		//	define constanst
+		$this->define_constants();
+	}
+
+	/**
+	 * define plugin constants
+	 *
+	 * @since	1.0.0
+	 * @access	private
+	 */
+	private function define_constants() {
+		$this->define( 'WP_MOBILE_PATH', $this->plugin_path );
+		$this->define( 'WP_MOBILE_URL', $this->plugin_uri );
+		$this->define( 'WP_MOBILE_INC_PATH', $this->inc_dir );
+		$this->define( 'WP_MOBILE_LIB_PATH', $this->lib_dir );
+		$this->define( 'WP_MOBILE_VENDOR_PATH', $this->vendor_dir );
+		$this->define( 'WP_MOBILE_TEMPLATE_PATH', $this->template_dir );
+	}
+
+	/**
+	 * set constant if not already set
+	 *
+	 * @since	1.0.0
+	 * @access	private
+	 * @param	string name
+	 * @param	string|bool value
+	 */
+	private function define( $name, $value ) {
+		if ( ! defined( $name ) ) {
+			define( $name, $value );
+		}
 	}
 
 	private function includes() {
 		//	include lib
 		require_once $this->lib_dir . 'class-wp-mobile-crypto.php';
+		require_once $this->lib_dir . 'class-wp-mobile-plugin-settings.php';
 
 		//	include inc
 		require_once $this->inc_dir . 'helpers.php';
+		require_once $this->inc_dir . 'plugin-settings/class-wp-mobile-general-settings.php';
 		require_once $this->inc_dir . 'class-wp-mobile-authenticate-user.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-posts-controller.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-users-controller.php';
