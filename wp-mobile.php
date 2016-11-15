@@ -101,7 +101,8 @@ class WP_Mobile {
 		if ( defined( 'REST_NAMESPACE' ) ) {
 			$this->namespace = REST_NAMESPACE;
 		}
-		add_action( 'init', array( $this, 'init' ), 0 );
+		$this->init();
+		//	add_action( 'init', array( $this, 'init' ), 0 );
 		return true;
 	}
 
@@ -137,7 +138,12 @@ class WP_Mobile {
 	}
 
 	private function includes() {
+		//	include lib
+		require_once $this->lib_dir . 'class-wp-mobile-crypto.php';
+
 		//	include inc
+		require_once $this->inc_dir . 'helpers.php';
+		require_once $this->inc_dir . 'class-wp-mobile-authenticate-user.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-posts-controller.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-users-controller.php';
 		require_once $this->inc_dir . 'rest-api/class-wp-mobile-attachments-controller.php';
