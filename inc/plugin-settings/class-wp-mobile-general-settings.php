@@ -11,6 +11,7 @@ class WP_Mobile_General_Settings {
 	 */
 	protected $page_slug = '';
 
+	protected $control = false;
 	/**
 	 * construct method
 	 *
@@ -20,6 +21,7 @@ class WP_Mobile_General_Settings {
 	 */
 	private function __construct() {
 		$this->page_slug = 'general';
+		$this->control = new WP_Mobile_Controls();
 	}
 
 	/**
@@ -63,6 +65,8 @@ class WP_Mobile_General_Settings {
 	 * @return	void
 	 */
 	public function page_content() {
+		$allow_devices = get_option( 'wp_mobile_allow_devices' , array() );
+		include( WP_MOBILE_TEMPLATE_PATH . 'plugin-settings/wp-mobile-general-plugin-settings.php' );
 	}
 
 	/**
@@ -74,6 +78,14 @@ class WP_Mobile_General_Settings {
 	 * @return	void
 	 */
 	public function save( $post ) {
+		//	save allow devices type
+		if ( isset( $post['allow_devices'] ) && is_array( $post['allow_devices'] )  ) {
+			if ( count( $post['allow_devices'] ) ) {
+				update_option( 'wp_mobile_allow_devices', $post['allow_devices'] );
+			} else {
+				delete_option( 'wp_mobile_allow_devices' );
+			}
+		}
 	}
 
 }

@@ -116,7 +116,17 @@ class WP_Mobile {
 	public function init() {
 		$this->includes();
 		add_action( 'rest_api_init', array( $this, 'overwrite_rest_api' ), -1 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ), 15 );
 		return true;
+	}
+
+	public function enqueue() {
+		$prefix = '.min';
+		if ( defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG ) {
+			$prefix = '';
+		}
+		wp_enqueue_script( 'wp-mobile-admin', WP_MOBILE_URL . 'assets/js/wp-mobile-admin' . $prefix . '.js', array( 'jquery' ) );
+		wp_enqueue_style( 'wp-mobile-admin', WP_MOBILE_URL . 'assets/css/wp-mobile-admin' . $prefix . '.css' );
 	}
 
 	/**

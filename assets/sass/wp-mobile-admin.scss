@@ -1,0 +1,184 @@
+/** Author     : ciphersoul **/
+.form-table {
+	width: 100%;
+	background: #fff;
+	margin: 0 0 1.5em;
+	tr {
+		th {
+			width: 30%;
+			position: relative;
+			.woocommerce-help-tip {
+				float: right;
+				margin: -8px -.5em 0 0;
+				vertical-align: middle;
+				right: 0;
+				top: 50%;
+				position: absolute;
+			}
+		}
+		td {
+			input, select, textarea {
+			}
+			input[type="checkbox"] {
+				width: auto;
+				/*min-width: 0;*/
+			}
+		}
+		td, th {
+			vertical-align: middle;
+			margin: 0;
+			line-height: 24px;
+			padding: 1em;
+			border-bottom: 1px solid #f8f8f8;
+		}
+	}
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+}
+table.form-table {
+	margin: 0;
+	position: relative;
+
+	.select2-container {
+		display: block;
+		max-width: 350px;
+	}
+
+	.forminp-radio ul {
+		margin: 0;
+		li {
+			line-height: 1.4em;
+		}
+	}
+
+	textarea.input-text {
+		height: 100%;
+		min-width: 150px;
+		display: block;
+	}
+
+	input.regular-input {
+		width: 25em;
+	}
+
+	textarea.wide-input {
+		width: 100%;
+	}
+
+	img.help_tip,
+	.woocommerce-help-tip {
+		padding: 0;
+		margin: -4px 0 0 5px;
+		vertical-align: middle;
+		cursor: help;
+		line-height: 1;
+	}
+
+	span.help_tip {
+		cursor: help;
+		color: #00F;
+	}
+
+	th {
+		position: relative;
+		padding-right: 24px;
+		vertical-align: top;
+	}
+
+	.select2-container {
+		vertical-align: top;
+		margin-bottom: 3px;
+	}
+
+	table.widefat th {
+		padding-right: inherit;
+	}
+
+	th img.help_tip,
+	th .woocommerce-help-tip {
+		margin: 0 -24px 0 0;
+		float: right;
+	}
+
+	.wp-list-table .woocommerce-help-tip {
+		float: none;
+	}
+
+	fieldset {
+		margin-top: 4px;
+
+		img.help_tip,
+		.woocommerce-help-tip {
+			margin: -3px 0 0 5px;
+		}
+
+		p.description {
+			margin-bottom: 8px;
+		}
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	.iris-picker {
+		z-index: 100;
+		display: none;
+		position: absolute;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+
+		.ui-slider {
+			border: 0 !important;
+			margin: 0 !important;
+			width: auto !important;
+			height: auto !important;
+			background: none transparent !important;
+
+			.ui-slider-handle {
+				margin-bottom: 0 !important;
+			}
+		}
+	}
+
+	.colorpickpreview {
+		padding: 3px;
+		padding-left: 20px;
+		border: 1px solid #ddd;
+		border-right: 0;
+	}
+
+	.colorpick {
+		border-left: 0;
+	}
+
+	.image_width_settings {
+		vertical-align: middle;
+
+		label {
+			margin-left: 10px;
+		}
+	}
+
+	.wp_emails_wrapper {
+		padding: 0 15px 10px 0;
+	}
+}
+
+.control-checkbox{
+	display: inline-block;
+	margin-bottom:5px;
+	&.country-item{
+		width: 200px;
+		text-overflow:ellipsis;
+		vertical-align:top;
+		height: 25px;
+		overflow: hidden;
+	}
+}
+.button-checkbox,
+.button-radio{
+	margin-right: 15px;
+}
