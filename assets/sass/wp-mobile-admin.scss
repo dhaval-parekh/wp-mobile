@@ -3,11 +3,15 @@
 	width: 100%;
 	background: #fff;
 	margin: 0 0 1.5em;
+	&.setting-table{
+		th{
+			width: 30%;
+		}
+	}
 	tr {
 		th {
-			width: 30%;
 			position: relative;
-			.woocommerce-help-tip {
+			.wp-mobile-help-tip {
 				float: right;
 				margin: -8px -.5em 0 0;
 				vertical-align: middle;
@@ -67,7 +71,7 @@ table.form-table {
 	}
 
 	img.help_tip,
-	.woocommerce-help-tip {
+	.wp-mobile-help-tip {
 		padding: 0;
 		margin: -4px 0 0 5px;
 		vertical-align: middle;
@@ -96,12 +100,12 @@ table.form-table {
 	}
 
 	th img.help_tip,
-	th .woocommerce-help-tip {
+	th .wp-mobile-help-tip {
 		margin: 0 -24px 0 0;
 		float: right;
 	}
 
-	.wp-list-table .woocommerce-help-tip {
+	.wp-list-table .wp-mobile-help-tip {
 		float: none;
 	}
 
@@ -109,7 +113,7 @@ table.form-table {
 		margin-top: 4px;
 
 		img.help_tip,
-		.woocommerce-help-tip {
+		.wp-mobile-help-tip {
 			margin: -3px 0 0 5px;
 		}
 
