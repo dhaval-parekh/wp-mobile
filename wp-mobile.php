@@ -172,6 +172,7 @@ class WP_Mobile {
 
 	private function includes() {
 		//	include lib
+		require_once $this->lib_dir . 'class-wp-mobile-controls.php';
 		require_once $this->lib_dir . 'class-wp-mobile-crypto.php';
 		require_once $this->lib_dir . 'class-wp-mobile-plugin-settings.php';
 
