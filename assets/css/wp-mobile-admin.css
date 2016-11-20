@@ -150,37 +150,9 @@ table.form-table .wp_emails_wrapper {
   overflow: hidden;
 }
 
-.wp-mobile-ratio-container li {
-  width: 33%;
-  float: left;
-  margin-bottom: 5px;
-}
-.wp-mobile-ratio-container li label {
-  width: 130px;
-  text-overflow: ellipsis;
-  vertical-align: top;
-  height: 25px;
-  overflow: hidden;
-  display: inline-block;
-}
-.wp-mobile-ratio-container li input {
-  width: 60px;
-}
-
-.minimum-subject-mark-container {
-  margin: 0;
-}
-.minimum-subject-mark-container li {
-  padding-right: 15px;
-  box-sizing: border-box;
-}
-.minimum-subject-mark-container li input {
-  width: auto;
-  max-width: 100%;
-}
-
-.application-form-table tr th {
-  width: auto;
+.button-checkbox,
+.button-radio {
+  margin-right: 15px;
 }
 
 /*# sourceMappingURL=wp-mobile-admin.css.map */

@@ -44,7 +44,7 @@ class WP_Mobile_Controls {
 		$attr_string = $this->_attributes_to_string( $args['attr'] );
 
 		//	render label
-		if ( $args['label'] ) {
+		if ( ! empty( $args['label'] ) ) {
 			$html .= ! empty( $args['html_attr']['before_label'] ) ? $args['html_attr']['before_label'] : '';
 				$html .= '<label for="' . $name . '">' . esc_html( $args['label'] ) . '</label>';
 			$html .= ! empty( $args['html_attr']['after_label'] ) ? $args['html_attr']['after_label'] : '';
@@ -80,7 +80,7 @@ class WP_Mobile_Controls {
 		}
 		$attr_string = $this->_attributes_to_string( $args['attr'] );
 		//	render label
-		if ( $args['label'] ) {
+		if ( ! empty( $args['label'] ) ) {
 			$html .= ! empty( $args['html_attr']['before_label'] ) ? $args['html_attr']['before_label'] : '';
 				$html .= '<label for="' . $name . '">' . esc_html( $args['label'] ) . '</label>';
 			$html .= ! empty( $args['html_attr']['after_label'] ) ? $args['html_attr']['after_label'] : '';
@@ -113,6 +113,13 @@ class WP_Mobile_Controls {
 		$args['value'] = ! empty( $args['value'] ) ? $args['value'] : array();
 		$args['value'] = is_array( $args['value'] ) ? $args['value'] : array( $args['value'] );
 
+		//	render label
+		if ( ! empty( $args['label'] ) ) {
+			$html .= ! empty( $args['html_attr']['before_label'] ) ? $args['html_attr']['before_label'] : '';
+				$html .= '<label for="' . $name . '">' . esc_html( $args['label'] ) . '</label>';
+			$html .= ! empty( $args['html_attr']['after_label'] ) ? $args['html_attr']['after_label'] : '';
+		}
+		$html .= ! empty( $args['html_attr']['before_control'] ) ? $args['html_attr']['before_control'] : '';
 		foreach ( $list as $value => $data ) {
 			$data['label'] = ! empty( $data['label'] ) ? $data['label'] : '';
 			$data['id_html'] = ! empty( $data['id'] ) ? 'id="' . $data['id'] . '"' : '';
@@ -120,12 +127,13 @@ class WP_Mobile_Controls {
 			if ( isset( $data['attr'] ) && count( $data['attr'] ) ) {
 				$data['attr_string'] = $this->_attributes_to_string( $data['attr'] );
 			}
-			$html .= ! empty( $args['html_attr']['before_control'] ) ? $args['html_attr']['before_control'] : '';
-			$html .= '<label>';
+			$html .= ! empty( $args['html_attr']['before_element'] ) ? $args['html_attr']['before_element'] : '';
+			$html .= '<label class="button-checkbox">';
 			$html .= '<input type="checkbox" value="' . $value . '" ' . $data['id_html'] . ' name="' . $name . '[' . $value . ']" ' . $data['attr_string'] . ' ' . checked( in_array( $value, $args['value'] ), true, false ) . '>';
 			$html .= '&nbsp;' . $data['label'] . '</label>';
-			$html .= ! empty( $args['html_attr']['after_control'] ) ? $args['html_attr']['after_control'] : '';
+			$html .= ! empty( $args['html_attr']['after_element'] ) ? $args['html_attr']['after_element'] : '';
 		}
+		$html .= ! empty( $args['html_attr']['after_control'] ) ? $args['html_attr']['after_control'] : '';
 		return $html;
 	}
 
@@ -140,6 +148,14 @@ class WP_Mobile_Controls {
 		$args['value'] = ! empty( $args['value'] ) ? $args['value'] : array();
 		$args['value'] = empty( $args['value'] ) || is_array( $args['value'] ) ? false : $args['value'];
 
+		//	render label
+		if ( ! empty( $args['label'] ) ) {
+			$html .= ! empty( $args['html_attr']['before_label'] ) ? $args['html_attr']['before_label'] : '';
+				$html .= '<label for="' . $name . '">' . esc_html( $args['label'] ) . '</label>';
+			$html .= ! empty( $args['html_attr']['after_label'] ) ? $args['html_attr']['after_label'] : '';
+		}
+
+		$html .= ! empty( $args['html_attr']['before_element'] ) ? $args['html_attr']['before_element'] : '';
 		foreach ( $list as $value => $data ) {
 			$data['label'] = ! empty( $data['label'] ) ? $data['label'] : '';
 			$data['id_html'] = ! empty( $data['id'] ) ? 'id="' . $data['id'] . '"' : '';
@@ -147,12 +163,13 @@ class WP_Mobile_Controls {
 			if ( isset( $data['attr'] ) && count( $data['attr'] ) ) {
 				$data['attr_string'] = $this->_attributes_to_string( $data['attr'] );
 			}
-			$html .= ! empty( $args['html_attr']['before_control'] ) ? $args['html_attr']['before_control'] : '';
-			$html .= '<label>';
+			$html .= ! empty( $args['html_attr']['before_element'] ) ? $args['html_attr']['before_element'] : '';
+			$html .= '<label class="button-radio">';
 			$html .= '<input type="radio" value="' . $value . '" ' . $data['id_html'] . ' name="' . $name . '" ' . $data['attr_string'] . ' ' . checked( ( $value == $args['value'] ), true, false ) . '>';
 			$html .= '&nbsp;' . $data['label'] . '</label>';
-			$html .= ! empty( $args['html_attr']['after_control'] ) ? $args['html_attr']['after_control'] : '';
+			$html .= ! empty( $args['html_attr']['after_element'] ) ? $args['html_attr']['after_element'] : '';
 		}
+		$html .= ! empty( $args['html_attr']['after_control'] ) ? $args['html_attr']['after_control'] : '';
 		return $html;
 	}
 

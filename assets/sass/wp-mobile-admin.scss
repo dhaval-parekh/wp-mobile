@@ -178,39 +178,7 @@ table.form-table {
 		overflow: hidden;
 	}
 }
-.wp-mobile-ratio-container{
-	li{
-		width: 33%;
-		float: left;
-		margin-bottom:5px;
-		label{
-			width: 130px;
-			text-overflow:ellipsis;
-			vertical-align:top;
-			height: 25px;
-			overflow: hidden;
-			display:inline-block;
-		}
-		input{
-			width: 60px;
-		}
-	}
-}
-.minimum-subject-mark-container{
-	margin:0;
-	li{
-		padding-right:15px;
-		box-sizing:border-box;
-		input{
-			width: auto;
-			max-width: 100%;
-		}
-	}
-}
-.application-form-table{
-	tr{
-		th{
-			width: auto;
-		}
-	}
+.button-checkbox,
+.button-radio{
+	margin-right: 15px;
 }
