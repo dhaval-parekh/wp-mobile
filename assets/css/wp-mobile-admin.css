@@ -4,11 +4,13 @@
   background: #fff;
   margin: 0 0 1.5em;
 }
-.form-table tr th {
+.form-table.setting-table th {
   width: 30%;
+}
+.form-table tr th {
   position: relative;
 }
-.form-table tr th .woocommerce-help-tip {
+.form-table tr th .wp-mobile-help-tip {
   float: right;
   margin: -8px -.5em 0 0;
   vertical-align: middle;
@@ -57,7 +59,7 @@ table.form-table textarea.wide-input {
   width: 100%;
 }
 table.form-table img.help_tip,
-table.form-table .woocommerce-help-tip {
+table.form-table .wp-mobile-help-tip {
   padding: 0;
   margin: -4px 0 0 5px;
   vertical-align: middle;
@@ -81,18 +83,18 @@ table.form-table table.widefat th {
   padding-right: inherit;
 }
 table.form-table th img.help_tip,
-table.form-table th .woocommerce-help-tip {
+table.form-table th .wp-mobile-help-tip {
   margin: 0 -24px 0 0;
   float: right;
 }
-table.form-table .wp-list-table .woocommerce-help-tip {
+table.form-table .wp-list-table .wp-mobile-help-tip {
   float: none;
 }
 table.form-table fieldset {
   margin-top: 4px;
 }
 table.form-table fieldset img.help_tip,
-table.form-table fieldset .woocommerce-help-tip {
+table.form-table fieldset .wp-mobile-help-tip {
   margin: -3px 0 0 5px;
 }
 table.form-table fieldset p.description {
