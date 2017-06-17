@@ -1,0 +1,1 @@
+var wp_mobile = wp_mobile || {};

@@ -5,6 +5,54 @@ module.exports = function (grunt) {
 	require('load-grunt-tasks')(grunt);
 
 	grunt.initConfig({
+		// Compile Sass to CSS
+		// Ref. https://www.npmjs.com/package/grunt-contrib-sass
+		sass: {
+			expanded: {
+				options: {
+					style: 'expanded' // nested / compact / compressed / expanded
+				},
+				files: {
+					'assets/css/wp-mobile-admin.css': 'assets/sass/wp-mobile-admin.scss' // 'destination': 'source'
+				}
+			},
+			minify: {
+				options: {
+					style: 'nested' // nested / compact / compressed / expanded
+				},
+				files: {
+					'assets/css/wp-mobile-admin.min.css': 'assets/sass/wp-mobile-admin.scss' // 'destination': 'source'
+				}
+			},
+		},
+		// autoprefixer
+		autoprefixer: {
+			options: {
+				browsers: ['last 2 versions', 'ie 9', 'ios 6', 'android 4'],
+				map: true
+			},
+			files: {
+				expand: true,
+				flatten: true,
+				src: '*.css',
+				dest: ''
+			}
+		},
+		// Uglify Ref. https://npmjs.org/package/grunt-contrib-uglify
+		uglify: {
+			options: {
+				banner: '/*! \n * WP Mobile JavaScript Library \n * @package WP Mobile \n */',
+				sourceMap: false,
+				sourceMappingURL: false,
+				sourceMapPrefix: 2
+			},
+			admin: {
+				src: [
+					'assets/js/wp-mobile-admin.js',
+				],
+				dest: 'assets/js/wp-mobile-admin.min.js',
+			},
+		},
 		// Internationalize WordPress themes and plugins
 		// Ref. https://www.npmjs.com/package/grunt-wp-i18n
 		//
@@ -65,5 +113,5 @@ module.exports = function (grunt) {
 	});
 
 	// register task
-	grunt.registerTask('default', ['checktextdomain', 'makepot']);
+	grunt.registerTask('default', [ 'sass', 'autoprefixer', 'uglify', 'checktextdomain', 'makepot' ]);
 };
